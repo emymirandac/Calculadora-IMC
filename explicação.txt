@@ -1,0 +1,170 @@
+<input type="number" id="peso" placeholder="Peso (kg)" required />
+
+- Explicação dos Atributos:
+<input>: É a tag HTML que cria um campo de entrada.
+
+type="number": Define que o campo aceitará apenas números. Isso ajuda a garantir que o usuário insira um valor numérico.
+
+id="peso": Atribui um identificador único ao campo, permitindo que você o acesse facilmente no JavaScript ou no CSS.
+
+placeholder="Peso (kg)": Exibe um texto de dica dentro do campo quando ele está vazio, indicando que o usuário deve inserir o peso em quilogramas.
+
+required: Indica que o campo é obrigatório. O formulário não será enviado se esse campo estiver vazio.
+
+/>: O fechamento da tag <input> é feito com />, pois é um elemento auto-fechado.
+
+
+
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: rgb(219, 150, 185);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* ou 100% mesmo */
+  margin: 0;
+}
+
+- Propriedades CSS:
+display: flex;:
+
+  Isso transforma o contêiner em um "flexível", permitindo que os itens dentro dele se organizem de maneira mais fácil e bonita.
+justify-content: center;:
+
+  Isso faz com que os itens dentro do contêiner fiquem alinhados no meio, de forma horizontal (lado a lado).
+align-items: center;:
+
+  Isso faz com que os itens dentro do contêiner fiquem alinhados no meio, de forma vertical (um em cima do outro).
+height: 100vh;:
+
+  Isso faz com que o contêiner ocupe toda a altura da tela do navegador. "100vh" significa "100% da altura da janela".
+margin: 0;:
+
+  Isso remove qualquer espaço extra ao redor do contêiner, fazendo com que ele use todo o espaço disponível.
+
+
+.container {
+background: white;
+padding: 20px;
+border-radius: 5px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+  O pontinho (.) que você vê na frente de .container é uma convenção do CSS que indica que estamos se   referindo a uma classe.
+  Significa que estamos selecionando um elemento HTML que tem a classe container.
+
+Explicação dos Estilos:
+background: white;:
+
+  Define a cor de fundo do contêiner como branca. Isso significa que a área dentro do contêiner terá um fundo branco.
+padding: 20px;:
+
+  Adiciona um espaço interno de 20 pixels ao redor do conteúdo dentro do contêiner. Isso significa que o conteúdo (como texto ou imagens) não ficará colado nas bordas do contêiner; haverá um espaço de 20 pixels entre o conteúdo e as bordas.
+border-radius: 5px;:
+
+  Arredonda os cantos do contêiner em 5 pixels. Isso faz com que os cantos do contêiner não sejam tão "duros" e pareçam mais suaves e amigáveis. É uma maneira de dar um toque mais moderno ao design.
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);:
+
+  Adiciona uma sombra ao contêiner. A sombra é definida por quatro valores:
+  O primeiro 0 é o deslocamento horizontal da sombra (0 significa que não se desloca para a direita ou esquerda).
+  O segundo 0 é o deslocamento vertical da sombra (0 significa que não se desloca para cima ou para baixo).
+  O 10px é o desfoque da sombra (quanto maior o número, mais borrada a sombra ficará).
+rgba(0, 0, 0, 0.1) define a cor da sombra. Aqui, é uma sombra preta (rgb(0, 0, 0)) com 10% de opacidade (0.1), o que a torna bem sutil.
+
+
+#resultado {
+    margin-top: 20px;
+    font-size: 1.2em;
+}
+  #resultado: Aqui estamos falando do ID "resultado". O # é só uma forma de dizer "Ei, eu quero estilizar o elemento que tem esse ID". No nosso HTML, temos <p id="resultado"></p>, então tudo que a gente colocar aqui vai afetar esse parágrafo que mostra o resultado do IMC.
+  
+  margin-top: 20px;: Esse cara aqui é o espaço que vai ficar em cima do parágrafo. Estamos dizendo que queremos 20 pixels de espaço acima dele. Isso ajuda a dar uma separada legal entre o resultado e os outros elementos da página, para que não fique tudo grudado.
+
+  font-size: 1.2em;: Esse é o tamanho da fonte do texto que vai aparecer no parágrafo. O 1.2em significa que o texto vai ser 1.2 vezes maior que o tamanho da fonte do elemento que está por cima dele. É uma forma de deixar o texto mais legível e garantir que ele se ajuste bem, dependendo do que está ao redor.
+
+
+
+ 
+ Explicações JavaScript:
+
+document.getElementById('calcular').addEventListener('click', function() {
+    const peso = parseFloat(document.getElementById('peso').value);
+    const altura = parseFloat(document.getElementById('altura').value);
+    const imc = peso / (altura * altura);
+    let classificacao = '';
+
+    if (imc < 18.5) {
+        classificacao = 'Abaixo do peso';
+    } else if (imc >= 18.5 && imc < 24.9) {
+        classificacao = 'Peso normal';
+    } else if (imc >= 25 && imc < 29.9) {
+        classificacao = 'Sobrepeso';
+    } else {
+        classificacao = 'Obesidade';
+    }
+
+    document.getElementById('resultado').innerHTML = `Seu IMC é ${imc.toFixed(2)}. Classificação: ${classificacao}`;
+});
+
+
+document.getElementById('calcular'):
+
+document: É um objeto que representa a página web. Ele contém todos os elementos HTML da página.
+
+getElementById('calcular'): É um método que busca um elemento HTML pelo seu ID. Aqui, estamos procurando o botão que tem o ID "calcular". O resultado é uma referência ao elemento do botão.
+
+.addEventListener('click', function() { ... }):
+
+addEventListener: É um método que permite adicionar um "ouvinte" para um evento específico (neste caso, um clique). Quando o evento ocorre, a função que está dentro dos parênteses é executada.
+
+'click': É o tipo de evento que estamos ouvindo. Aqui, estamos ouvindo por cliques no botão.
+
+function() { ... }: Esta é uma função anônima que será executada quando o botão for clicado. O código dentro das chaves { ... } é o que acontece quando o evento de clique ocorre.
+
+const peso = parseFloat(document.getElementById('peso').value);:
+
+const: É uma palavra-chave que declara uma variável cujo valor não pode ser reatribuído. Aqui, estamos criando uma variável chamada peso.
+
+parseFloat(...): É uma função que converte uma string em um número decimal (float). Isso é importante porque os valores que obtemos dos campos de entrada são strings.
+
+document.getElementById('peso').value: Aqui, estamos buscando o valor do campo de entrada que tem o ID "peso". O .value retorna o texto que o usuário digitou.
+
+const altura = parseFloat(document.getElementById('altura').value);:
+
+Funciona da mesma forma que a linha anterior, mas aqui estamos pegando o valor do campo de entrada para a altura (com ID "altura").
+
+const imc = peso / (altura * altura);:
+
+imc: É uma nova variável que armazena o resultado do cálculo do IMC.
+
+peso / (altura * altura): Aqui estamos usando a fórmula do IMC, que é o peso dividido pela altura ao quadrado. O altura * altura calcula a altura ao quadrado.
+
+let classificacao = '';:
+
+let: É uma palavra-chave que declara uma variável cujo valor pode ser reatribuído. Aqui, estamos criando uma variável chamada classificacao e inicializando-a como uma string vazia. Vamos usar essa variável para armazenar a classificação do IMC.
+
+if (imc < 18.5) { ... }:
+
+Aqui começamos a verificar a classificação do IMC. Se o IMC for menor que 18.5, a condição é verdadeira e o código dentro das chaves será executado.
+classificacao = 'Abaixo do peso';: Se a condição for verdadeira, atribuímos a string 'Abaixo do peso' à variável classificacao.
+
+else if (imc >= 18.5 && imc < 24.9) { ... }:
+
+else if: Esta é uma condição que só será verificada se a condição anterior (if (imc < 18.5)) for falsa. Se o IMC estiver entre 18.5 e 24.9, o código dentro das chaves será executado.
+classificacao = 'Peso normal';: Se essa condição for verdadeira, atribuímos a string 'Peso normal' à variável classificacao.
+else if (imc >= 25 && imc < 29.9) { ... }:
+
+Aqui, estamos verificando se o IMC está entre 25 e 29.9. Se sim, o código dentro das chaves será executado.
+classificacao = 'Sobrepeso';: Se essa condição for verdadeira, atribuímos a string 'Sobrepeso' à variável classificacao.
+else { ... }:
+
+O else é usado para capturar todos os casos que não foram tratados nas condições anteriores. Se o IMC for 30 ou mais, o código dentro das chaves será executado.
+classificacao = 'Obesidade';: Aqui, atribuímos a string 'Obesidade' à variável classificacao, já que o IMC é considerado obeso.
+document.getElementById('resultado').innerHTML = ...:
+
+document.getElementById('resultado'): Estamos buscando o elemento HTML que tem o ID "resultado", que é onde vamos mostrar o IMC e a classificação.
+.innerHTML: Este é um atributo que permite definir ou obter o conteúdo HTML de um elemento. Aqui, estamos definindo o conteúdo HTML do parágrafo para mostrar o resultado.
+`Seu IMC é ${imc.toFixed(2)}. Classificação: ${classificacao}`: Estamos usando uma template string (com crase ``) para criar uma mensagem que inclui o valor do IMC e a classificação.
+${imc.toFixed(2)}: O toFixed(2) formata o IMC para mostrar duas casas decimais. Isso deixa o número mais apresentável.
+${classificacao}: Aqui estamos inserindo o valor da variável classificacao na mensagem.
